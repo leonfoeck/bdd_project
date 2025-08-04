@@ -1,0 +1,17 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="jakarta.faces.html"
+        xmlns:ui="jakarta.faces.facelets">
+
+    <h:form id="headerForm">
+        <h:panelGrid id="headerPanel" columns="2" border="0">
+            <h:outputText value="#{headerController.applicationName}" styleClass="pagetitle"/>
+
+            <h:graphicImage id="logo"
+                            value="#{headerController.logoPath}"
+                            cache="false"
+                            height="40ppt"/>
+        </h:panelGrid>
+    </h:form>
+
+</ui:composition>

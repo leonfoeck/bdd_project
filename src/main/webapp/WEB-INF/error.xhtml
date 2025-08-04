@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets">
+
+<ui:composition template="/WEB-INF/template/main.xhtml">
+
+    <ui:param name="title" value="Fehler"/>
+
+    <ui:define name="content">
+        <h1>Es ist ein Fehler aufgetreten</h1>
+
+        <ui:repeat value="#{requestScope['exceptionStackTraces']}" var="throwable">
+            <h5>#{throwable.toString()}</h5>
+            <ul>
+                <ui:repeat value="#{throwable.getStackTrace()}" var="stack">
+                    <li>#{stack.className} – #{stack.methodName} - #{stack.fileName} (#{stack.lineNumber})</li>
+                </ui:repeat>
+            </ul>
+        </ui:repeat>
+    </ui:define>
+</ui:composition>
+
+</html>

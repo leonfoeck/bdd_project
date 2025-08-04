@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html">
+
+<ui:composition template="/WEB-INF/template/main.xhtml">
+
+    <ui:param name="title" value="404 – Seite nicht gefunden"/>
+
+    <ui:define name="content">
+        <h1>
+            <h:outputLabel id="messageLabel404" value="Fehler 404 – Die Seite wurde nicht gefunden"/>
+        </h1>
+    </ui:define>
+</ui:composition>
+
+</html>

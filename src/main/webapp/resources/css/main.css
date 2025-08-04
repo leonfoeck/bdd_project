@@ -1,0 +1,13 @@
+.pagetitle {
+  font-size: xx-large;
+}
+
+.ui-datatable-even {
+  background-color: #CDCDCD;
+  background-image: none;
+}
+
+.ui-datatable-odd {
+  background-color: #FFFFFF;
+  background-image: none;
+}

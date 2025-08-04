@@ -1,0 +1,155 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="jakarta.faces.html"
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:f="jakarta.faces.core"
+        template="WEB-INF/template/main.xhtml">
+    <ui:define
+            name="dashboard">
+
+        <h:form
+                id="filtering">
+            <div style="display: grid; grid-template-columns: repeat(2, 450px)">
+        <span>
+          <h:outputLabel
+                  for="selectDate"
+                  value="Bitte wählen Sie ein Datum:"/>
+        </span>
+                <span>
+          <h:inputText
+                  id="selectDate"
+                  value="#{dashboardController.selectedDate}"
+                  style="width: 450px">
+            <f:convertDateTime type="localDate"/>
+          </h:inputText>
+        </span>
+
+                <span>
+          <h:outputLabel
+                  for="filterAdditives"
+                  value="Bitte wählen Sie die zu exkludierenden Zusatzstoffe aus:"/>
+        </span>
+                <span>
+          <h:selectManyListbox
+                  id="filterAdditives"
+                  value="#{dashboardController.selectedAdditives}"
+                  label="Exkludiere Zusatzstoffe"
+                  size="2"
+                  style="width: 450px">
+            <f:selectItems
+                    value="#{dashboardController.additives}"
+                    var="additive"
+                    itemLabel="#{additive.additive}"
+                    itemValue="#{additive}"/>
+          </h:selectManyListbox>
+        </span>
+
+                <span>
+          <h:outputLabel
+                  for="filterAllergens"
+                  value="Bitte wählen Sie die zu exkludierenden Allergene aus:"/>
+        </span>
+                <span>
+          <h:selectManyListbox
+                  id="filterAllergens"
+                  value="#{dashboardController.selectedAllergens}"
+                  label="Exkludiere Allergene"
+                  size="2"
+                  style="width: 450px">
+            <f:selectItems
+                    value="#{dashboardController.allergens}"
+                    var="allergen"
+                    itemLabel="#{allergen.allergen}"
+                    itemValue="#{allergen}"/>
+          </h:selectManyListbox>
+        </span>
+
+                <span>
+          <h:outputLabel
+                  for="filterTags"
+                  value="Bitte wählen Sie die zu exkludierenden Tags aus:"/>
+        </span>
+                <span>
+          <h:selectManyListbox
+                  id="filterTags"
+                  value="#{dashboardController.selectedTags}"
+                  label="Exkludiere Tags"
+                  size="2"
+                  style="width: 450px">
+            <f:selectItems
+                    value="#{dashboardController.tags}"
+                    var="tag"
+                    itemLabel="#{tag.tag}"
+                    itemValue="#{tag}"/>
+          </h:selectManyListbox>
+        </span>
+
+                <span></span>
+                <span>
+          <h:commandButton
+                  id="showMenu"
+                  value="Anzeigen"
+                  action="#{dashboardController.submit}"
+                  style="width: 450px"/>
+        </span>
+
+            </div>
+
+            <h:dataTable
+                    value="#{dashboardController.dishes}"
+                    var="dish"
+                    styleClass="ui-datatable"
+                    id="dishTable"
+                    rowClasses="ui-datatable-even,ui-datatable-odd">
+
+                <h:column id="columnTyp" style="width: 7em">
+                    <f:facet name="header">Typ</f:facet>
+                    <h:outputText value="#{dish.type()}" id="type"/>
+                </h:column>
+
+                <h:column id="columnName" style="min-width: 45%">
+                    <f:facet name="header">Name</f:facet>
+                    <h:outputText value="#{dish.name()}" id="name"/>
+                </h:column>
+
+                <h:column id="columnAdditives">
+                    <f:facet name="header">Zusatzstoffe</f:facet>
+                    <h:outputText value="#{dish.additives()}" id="additives" escape="false">
+                        <f:converter converterId="additivePrettyPrintConverter"/>
+                    </h:outputText>
+                </h:column>
+
+                <h:column id="columnAllergens">
+                    <f:facet name="header">Allergene</f:facet>
+                    <h:outputText value="#{dish.allergens()}" id="allergens" escape="false">
+                        <f:converter converterId="allergenPrettyPrintConverter"/>
+                    </h:outputText>
+                </h:column>
+
+                <h:column id="columnTags">
+                    <f:facet name="header">Tags</f:facet>
+                    <h:outputText value="#{dish.tags()}" id="tags">
+                        <f:converter converterId="tagPrettyPrintConverter"/>
+                    </h:outputText>
+                </h:column>
+
+                <h:column id="columnPrices">
+                    <f:facet name="header">Preis</f:facet>
+                    <h:outputText value="#{dish.price()}" id="price">
+                        <f:convertNumber currencySymbol="€" type="currency"/>
+                    </h:outputText>
+                </h:column>
+
+            </h:dataTable>
+
+            <h:messages
+                    severity="info"
+                    summary="INFO"
+                    detail="Kein Ergebnis gefunden"
+                    style="width: 100%"
+                    rendered="#{dashboardController.totalDishes==0}"/>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>

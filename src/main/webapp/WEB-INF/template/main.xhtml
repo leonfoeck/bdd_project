@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="de"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:f="jakarta.faces.core">
+
+<f:view locale="de">
+    <h:head>
+        <title>#{headerController.applicationName}</title>
+        <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <h:outputStylesheet library="css" name="main.css"/>
+    </h:head>
+
+    <h:body style="display: flex; min-height: 98vh; flex-direction: column">
+        <header id="header" style="flex-shrink: 0">
+            <ui:include src="header.xhtml"/>
+        </header>
+        <main id="main" style="flex-grow: 1">
+            <h:messages id="message" showDetail="true" closable="true" globalOnly="true"/>
+            <ui:insert name="dashboard"/>
+        </main>
+        <footer id="footer" style="flex-shrink: 0">
+            <ui:include src="footer.xhtml"/>
+        </footer>
+    </h:body>
+</f:view>
+
+</html>
